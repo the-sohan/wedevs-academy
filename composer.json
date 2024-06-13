@@ -1,0 +1,20 @@
+{
+    "name": "sohan/wedevs-academy",
+    "description": "A test plugin",
+    "type": "wordpress-plugin",
+    "license": "GPLv2",
+    "authors": [
+        {
+            "name": "Sohan Chowdhury",
+            "email": "pro.sohan7@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "WeDevs\\Academy\\": "includes/"
+        },
+        "files": []
+    }
+}

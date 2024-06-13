@@ -2,9 +2,9 @@
 /*
  * Plugin Name:       weDevs Academy
  * Description:       https://www.youtube.com/watch?v=D_I3qpuGKno&list=PLx7dNwJLCzHldCT_F1uOBELcSYktvrePO
- * Version:           1.0
- * Author:            Sohan 12 mins
- * Text Domain:       my-basics-plugin
+ * Version:           32.00
+ * Author:            Sohan
+ * Text Domain:       wedevs-academy
  * Domain Path:       /languages
  */
 
@@ -12,7 +12,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-// The main plugin
+require_once __DIR__ . '/vendor/autoload.php';
+
+// The main plugin class
 final class WeDevs_Academy {
 
 	/**
@@ -22,13 +24,15 @@ final class WeDevs_Academy {
 	 */
 	const VERSION = '1.0';
 
-	// Class constructor
+	/**
+	 * Class constructor
+	 */
 	private function __construct() {
 		$this->define_constants();
-		
-		register_activatino_hook( __FILE__, 'activate' );
-		
-		add_action( 'plugins_loaded', [ $this, 'init_plugin' ], 10, 1 );
+
+		register_activation_hook( __FILE__, [ $this, 'activate' ] );
+
+		add_action( 'plugins_loaded', [ $this, 'init_plugin' ] );
 	}
 
 	/**
@@ -49,7 +53,7 @@ final class WeDevs_Academy {
 	/**
 	 * Define the required plugin constants
 	 *
-	 * $return void
+	 * @return void
 	 */
 	public function define_constants() {
 		define( 'WD_ACADEMY_VERSION', self::VERSION );
@@ -60,19 +64,31 @@ final class WeDevs_Academy {
 	}
 	
 	/**
-	 * Do staff upon activation
+	 * Initialize the plugin
 	 * 
 	 * @return void
 	 */
-	public funtion activate(){
-		$installed = get_option( 'wd_academy_installed' );
+	public function init_plugin() {
+
+		if ( is_admin() ) {
+			new \WeDevs\Academy\Admin();
+		}
 		
+	}
+
+	/**
+	 * Do stuff upon plugin activation
+	 * 
+	 * @return void
+	 */
+	public function activate() {
+		$installed = get_option( 'wd_academy_installed' );
+
 		if ( ! $installed ) {
 			update_option( 'wd_academy_installed', time() );
 		}
-		
-		update_option( 'wd_academy_version', 'WD_ACADEMY_VERSION' );
-		
+
+		update_option( 'wd_academy_version', WD_ACADEMY_VERSION );
 	}
 }
 
@@ -88,5 +104,3 @@ function wedevs_academy() {
 // Initialize the plugin
 wedevs_academy();
 
-
-?>
