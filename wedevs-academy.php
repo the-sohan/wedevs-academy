@@ -25,8 +25,10 @@ final class WeDevs_Academy {
 	// Class constructor
 	private function __construct() {
 		$this->define_constants();
-
-
+		
+		register_activatino_hook( __FILE__, 'activate' );
+		
+		add_action( 'plugins_loaded', [ $this, 'init_plugin' ], 10, 1 );
 	}
 
 	/**
@@ -45,7 +47,9 @@ final class WeDevs_Academy {
 	}
 
 	/**
-	 * Define the constants
+	 * Define the required plugin constants
+	 *
+	 * $return void
 	 */
 	public function define_constants() {
 		define( 'WD_ACADEMY_VERSION', self::VERSION );
@@ -53,6 +57,22 @@ final class WeDevs_Academy {
 		define( 'WD_ACADEMY_PATH', __DIR__ );
 		define( 'WD_ACADEMY_URL', plugins_url( '', WD_ACADEMY_FILE ) );
 		define( 'WD_ACADEMY_ASSETS', WD_ACADEMY_URL . '/assets' );
+	}
+	
+	/**
+	 * Do staff upon activation
+	 * 
+	 * @return void
+	 */
+	public funtion activate(){
+		$installed = get_option( 'wd_academy_installed' );
+		
+		if ( ! $installed ) {
+			update_option( 'wd_academy_installed', time() );
+		}
+		
+		update_option( 'wd_academy_version', 'WD_ACADEMY_VERSION' );
+		
 	}
 }
 
@@ -67,3 +87,6 @@ function wedevs_academy() {
 
 // Initialize the plugin
 wedevs_academy();
+
+
+?>
