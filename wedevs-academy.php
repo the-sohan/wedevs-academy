@@ -72,6 +72,8 @@ final class WeDevs_Academy {
 
 		if ( is_admin() ) {
 			new \WeDevs\Academy\Admin();
+		} else {
+			new \WeDevs\Academy\Frontend();
 		}
 		
 	}
