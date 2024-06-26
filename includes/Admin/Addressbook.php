@@ -25,7 +25,23 @@ class Addressbook {
         if ( file_exists( $template ) ) {
             include $template;
         }
-    
+    }
+
+    public function form_handler() {
+        if ( ! isset( $_POST['submit_address'] ) ) {
+            return;
+        }
+
+        if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'new_address') ) {
+            wp_die( 'Are you cheating?' );
+        }
+
+        if ( ! current_user_can( 'manage_options' ) ) {
+            wp_die( 'Are you cheating?' );
+        }
+
+        var_dump( $_POST );
+        exit;
     }
 
     
