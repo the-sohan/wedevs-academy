@@ -9,7 +9,7 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+    exit;
 }
 
 require_once __DIR__ . '/vendor/autoload.php';
@@ -17,75 +17,74 @@ require_once __DIR__ . '/vendor/autoload.php';
 // The main plugin class
 final class WeDevs_Academy {
 
-	/**
-	 * Plugin version
-	 * 
-	 * @var string
-	 */
-	const VERSION = '1.0';
+    /**
+     * Plugin version
+     * 
+     * @var string
+     */
+    const VERSION = '1.0';
 
-	/**
-	 * Class constructor
-	 */
-	private function __construct() {
-		$this->define_constants();
+    /**
+     * Class constructor
+     */
+    private function __construct() {
+        $this->define_constants();
 
-		register_activation_hook( __FILE__, [ $this, 'activate' ] );
+        register_activation_hook( __FILE__, [ $this, 'activate' ] );
 
-		add_action( 'plugins_loaded', [ $this, 'init_plugin' ] );
-	}
+        add_action( 'plugins_loaded', [ $this, 'init_plugin' ] );
+    }
 
-	/**
-	 * Initializes a Singleton instance
-	 * 
-	 * @return \WeDevs_Academy
-	 */
-	public static function init() {
-		static $instance = false; 
+    /**
+     * Initializes a Singleton instance
+     * 
+     * @return \WeDevs_Academy
+     */
+    public static function init() {
+        static $instance = false; 
 
-		if ( ! $instance ) {
-			$instance = new self();
-		} 
-		
-		return $instance;
-	}
+        if ( ! $instance ) {
+            $instance = new self();
+        } 
+        
+        return $instance;
+    }
 
-	/**
-	 * Define the required plugin constants
-	 *
-	 * @return void
-	 */
-	public function define_constants() {
-		define( 'WD_ACADEMY_VERSION', self::VERSION );
-		define( 'WD_ACADEMY_FILE', __FILE__ );
-		define( 'WD_ACADEMY_PATH', __DIR__ );
-		define( 'WD_ACADEMY_URL', plugins_url( '', WD_ACADEMY_FILE ) );
-		define( 'WD_ACADEMY_ASSETS', WD_ACADEMY_URL . '/assets' );
-	}
-	
-	/**
-	 * Initialize the plugin
-	 * 
-	 * @return void
-	 */
-	public function init_plugin() {
+    /**
+     * Define the required plugin constants
+     *
+     * @return void
+     */
+    public function define_constants() {
+        define( 'WD_ACADEMY_VERSION', self::VERSION );
+        define( 'WD_ACADEMY_FILE', __FILE__ );
+        define( 'WD_ACADEMY_PATH', __DIR__ );
+        define( 'WD_ACADEMY_URL', plugins_url( '', WD_ACADEMY_FILE ) );
+        define( 'WD_ACADEMY_ASSETS', WD_ACADEMY_URL . '/assets' );
+    }
+    
+    /**
+     * Initialize the plugin
+     * 
+     * @return void
+     */
+    public function init_plugin() {
+        if ( is_admin() ) {
+            new \WeDevs\Academy\Admin();
+        } else {
+            new \WeDevs\Academy\Frontend();
+        }
+    }
 
-		if ( is_admin() ) {
-			new \WeDevs\Academy\Admin();
-		} else {
-			new \WeDevs\Academy\Frontend();
-		}
-		
-	}
-
-	/**
-	 * Do stuff upon plugin activation
-	 * 
-	 * @return void
-	 */
-	public function activate() {
-		new WeDevs\Academy\Installer();
-	}
+    /**
+     * Do stuff upon plugin activation
+     * 
+     * @return void
+     */
+    public function activate() {
+        $installer = new \WeDevs\Academy\Installer();
+        $installer->run();
+    }
 }
 
 /**
@@ -94,9 +93,8 @@ final class WeDevs_Academy {
  * @return \WeDevs_Academy
  */
 function wedevs_academy() {
-	return WeDevs_Academy::init();
+    return WeDevs_Academy::init();
 }
 
 // Initialize the plugin
 wedevs_academy();
-

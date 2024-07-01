@@ -6,21 +6,23 @@ class Installer {
 
     public function run() {
         $this->add_version();
-        $this->create_table();
+        $this->create_tables();
     }
 
-    public function add_version(){
+    public function add_version() {
         $installed = get_option( 'wd_academy_installed' );
 
-		if ( ! $installed ) {
-			update_option( 'wd_academy_installed', time() );
-		}
+        if ( ! $installed ) {
+            update_option( 'wd_academy_installed', time() );
+        }
 
-		update_option( 'wd_academy_version', WD_ACADEMY_VERSION );
+        update_option( 'wd_academy_version', WD_ACADEMY_VERSION );
     }
 
-    public function create_tables(){
+    public function create_tables() {
         global $wpdb;
+
+        $charset_collate = $wpdb->get_charset_collate();
 
         $schema = "CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}ac_addresses` (
             `id` int(11) unsigned NOT NULL AUTO_INCREMENT, 
@@ -30,8 +32,9 @@ class Installer {
             `created_by` bigint(20) unsigned NOT NULL,
             `created_at` datetime NOT NULL,
             PRIMARY KEY (`id`)
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+        ) $charset_collate;";
 
+        require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+        dbDelta( $schema );
     }
-
 }
