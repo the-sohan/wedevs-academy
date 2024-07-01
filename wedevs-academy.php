@@ -2,7 +2,7 @@
 /*
  * Plugin Name:       weDevs Academy
  * Description:       https://www.youtube.com/watch?v=D_I3qpuGKno&list=PLx7dNwJLCzHldCT_F1uOBELcSYktvrePO
- * Version:           32.00
+ * Version:           21.00
  * Author:            Sohan
  * Text Domain:       wedevs-academy
  * Domain Path:       /languages
