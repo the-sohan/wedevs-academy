@@ -5,10 +5,15 @@ namespace WeDevs\Academy\Admin;
  * The menu handler class
  */
 class Menu {
+
+    public $addressbook;
+
     /**
      * Constructor method to initialize the class
      */
-    public function __construct() {
+    public function __construct( $addressbook ) {
+        $this->addressbook = $addressbook;
+        
         add_action( 'admin_menu', [ $this, 'admin_menu' ] );
     }
 
@@ -26,7 +31,7 @@ class Menu {
             __( 'Academy', 'wedevs-academy' ), 
             $capability, 
             $parent_slug, 
-            [ $this, 'addressbook_page' ], 
+            [ $this->addressbook, 'plugin_page' ], 
             'dashicons-welcome-learn-more', 
             null
         );
@@ -38,7 +43,7 @@ class Menu {
             __( 'Address Book', 'wedevs-academy' ), 
             $capability, 
             $parent_slug, 
-            [ $this, 'addressbook_page' ] 
+            [ $this->addressbook, 'plugin_page' ] 
         );
 
         add_submenu_page( 
@@ -49,16 +54,6 @@ class Menu {
             'wedevs-academy-settings', 
             [ $this, 'settings_page' ] 
         );
-    }
-
-
-
-    /**
-     * Displays the plugin page content
-     */
-    public function addressbook_page() {
-        $addressbook = new Addressbook();
-        $addressbook->plugin_page();
     }
 
     public function settings_page() {
