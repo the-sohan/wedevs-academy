@@ -48,3 +48,34 @@ function wd_ac_insert_address( $args = [] ) {
     // Return the ID of the newly inserted row
     return $wpdb->insert_id;
 }
+
+function wd_ac_get_addresses( $args = [] ) {
+    global $wpdb;
+
+    $defaults = [
+        'number' => 20,
+        'offset' => 0,
+        'orderby' => 'id',
+        'order' => 'ASC'
+    ];
+
+    $args = wp_parse_args($args, $defaults);
+
+    $items = $wpdb->get_results(
+        $wpdb->prepare(
+            "SELECT * FROM {$wpdb->prefix}ac_addresses
+            ORDER BY %s %s
+            LIMIT %d, %d",
+            $args['orderby'], $args['order'], $args['offset'], $args['number']
+        )
+    );
+
+    return $items;
+}
+
+function wd_ac_address_count() {
+    global $wpdb;
+
+    return (int) $wpdb->get_var( "SELECT count(id) FROM {$wpdbp->prefix}ac_address" );
+    
+}

@@ -82,5 +82,28 @@ class Addressbook {
 
     }
 
+?>
+    // CLASS 04
+    // =========
+amra ekhon database e je data gula save kora ace sugula show korate chai,
+fetch korar jonno amader ekta function banate hobe,
+amader database e koto ta exctly data ace seta o amader ber korte hobe 
+
+function.php te amader insert korar function already ace, 
+fetch kora function toiri korbo ekhon:
+
     
+7.17 mins 
+-----------
+so, amra amader show korar pala; wordpress er ekta Class ace (not so much well documentation) 
+wp_list_table();
+amader je post table thake, pages table thake, comment table thake, so gula table data structure ek e dhoroner 
+So sob jaygay same dhoroner structure use hocche
+se jonno amra Admin folder e ekta Class likhbo, jar naam hobe Address_List.ph
+
+amra ekta class likbo, jeta wp list table ke Extend korbe; wp_list_table sorasori use kora jay na, extend kore nite hoy. 
+<!-- Admin/Address_List.php -->
+<?php
+
+?>
 
