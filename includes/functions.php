@@ -64,9 +64,9 @@ function wd_ac_get_addresses( $args = [] ) {
     $items = $wpdb->get_results(
         $wpdb->prepare(
             "SELECT * FROM {$wpdb->prefix}ac_addresses
-            ORDER BY %s %s
+            ORDER BY  {$args['orderby']} {$args['order']}
             LIMIT %d, %d",
-            $args['orderby'], $args['order'], $args['offset'], $args['number']
+            $args['offset'], $args['number']
         )
     );
 
@@ -76,6 +76,6 @@ function wd_ac_get_addresses( $args = [] ) {
 function wd_ac_address_count() {
     global $wpdb;
 
-    return (int) $wpdb->get_var( "SELECT count(id) FROM {$wpdbp->prefix}ac_address" );
+    return (int) $wpdb->get_var( "SELECT count(id) FROM {$wpdb->prefix}ac_addresses" );
     
 }
