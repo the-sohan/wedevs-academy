@@ -83,8 +83,8 @@ class Addressbook {
     }
 
 ?>
-    // CLASS 04
-    // =========
+// CLASS 04
+// =========
 amra ekhon database e je data gula save kora ace sugula show korate chai,
 fetch korar jonno amader ekta function banate hobe,
 amader database e koto ta exctly data ace seta o amader ber korte hobe 
@@ -106,4 +106,22 @@ amra ekta class likbo, jeta wp list table ke Extend korbe; wp_list_table sorasor
 <?php
 
 ?>
+
+CLASS 05
+=========
+
+
+<?php
+
+
+
+
+
+
+
+?>
+
+
+
+
 

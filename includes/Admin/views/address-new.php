@@ -10,6 +10,10 @@
                     </th>
                     <td>
                         <input type="text" name="name" id="name" class="regular-text" value="">
+
+                        <?php if ( isset( $this->errors['name'] ) ) { ?>
+                            <p class="description error"><?php echo $this->errors['name'] ?></p>
+                        <?php } ?>
                     </td>
                 </tr>
                 <tr>
@@ -18,6 +22,8 @@
                     </th>
                     <td>
                         <textarea name="address" id="address" class="regular-text"></textarea>
+
+                        
                     </td>
                 </tr>
                 <tr>
@@ -26,6 +32,9 @@
                     </th>
                     <td>
                         <input type="number" name="phone" id="phone" class="regular-text" value="">
+                        <?php if ( isset( $this->errors['phone'] ) ) { ?>
+                            <p class="description error"><?php echo $this->errors['phone'] ?></p>
+                        <?php } ?>
                     </td>
                 </tr>
             </tbody>
