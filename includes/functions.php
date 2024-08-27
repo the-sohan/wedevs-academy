@@ -26,26 +26,50 @@ function wd_ac_insert_address( $args = [] ) {
     // Parse the arguments with the defaults
     $data = wp_parse_args( $args, $defaults );
 
-    // Insert the data into the database
-    $inserted = $wpdb->insert(
-        "{$wpdb->prefix}ac_addresses",
-        $data,
-        [
-            '%s',
-            '%s',
-            '%s',
-            '%d',
-            '%s'
-        ]
-    );
+    if ( isset ( $data['id'] ) ) {
 
-    // Check if the insertion was successful
-    if ( ! $inserted ) {
-        return new \WP_Error( 'failed-to-insert', __( 'Failed to insert data', 'wedevs-academy' ) );
-    }
+        $id = $data['id'];
+        unset( $data['id'] );
 
-    // Return the ID of the newly inserted row
-    return $wpdb->insert_id;
+        $updated = $wpdb->update(
+            "{$wpdb->prefix}ac_addresses",
+            $data,
+            [ 'id' => $id ],
+            [
+                '%s',
+                '%s',
+                '%s',
+                '%d',
+                '%s'
+            ],
+            [ '%d' ] 
+        );
+
+        return $updated;
+
+    } else {
+        // Insert the data into the database
+        $inserted = $wpdb->insert(
+            "{$wpdb->prefix}ac_addresses",
+            $data,
+            [
+                '%s',
+                '%s',
+                '%s',
+                '%d',
+                '%s'
+            ]
+        );
+
+        // Check if the insertion was successful
+        if ( ! $inserted ) {
+            return new \WP_Error( 'failed-to-insert', __( 'Failed to insert data', 'wedevs-academy' ) );
+        }
+
+        // Return the ID of the newly inserted row
+        return $wpdb->insert_id;
+    } 
+
 }
 
 function wd_ac_get_addresses( $args = [] ) {
