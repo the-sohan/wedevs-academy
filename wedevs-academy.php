@@ -3,7 +3,7 @@
  * Plugin Name:       weDevs Academy
  * Description:       https://www.youtube.com/watch?v=D_I3qpuGKno&list=PLx7dNwJLCzHldCT_F1uOBELcSYktvrePO
  * Version:           1.0
- * Author:            Sohan - class 5 - 24.00 mins
+ * Author:            Sohan - class 5 - 36.00 mins
  * Text Domain:       wedevs-academy
  * Domain Path:       /languages
  */

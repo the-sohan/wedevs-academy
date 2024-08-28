@@ -1,6 +1,12 @@
 <div class="wrap">
     <h1 class="wp-heading-inline"><?php _e( 'Edit Address', 'wedevs-academy' ); ?></h1>
 
+    <?php if ( isset ( $_GET['address-updated'] ) ) { ?>
+        <div class="notice notice-success">
+            <p><?php _e( 'Address has been updated successfully', 'wedevs-academy' ); ?></p>
+        </div>
+    <?php } ?>
+
     <form action="" method="post">
         <table class="form-table">
             <tbody>
