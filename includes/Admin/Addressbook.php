@@ -108,9 +108,9 @@ class Addressbook {
         $id = isset( $_REQUEST['id'] ) ? intval( $_REQUEST['id'] ) : 0;
 
         if ( wd_ac_delete_address( $id ) ) {
-            $redirected_to = admin_url( 'admin.php?page=wedevs-academy&deleted=true' );
+            $redirected_to = admin_url( 'admin.php?page=wedevs-academy&address-deleted=true' );
         } else {
-            $redirected_to = admin_url( 'admin.php?page=wedevs-academy&deleted=false' );
+            $redirected_to = admin_url( 'admin.php?page=wedevs-academy&address-deleted=false' );
         }
 
         wp_redirect( $redirected_to );

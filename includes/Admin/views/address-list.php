@@ -8,6 +8,12 @@
         <div class="notice notice-success">
             <p><?php _e( 'Address added successfully', 'wedevs-academy' ); ?></p>
         </div>
+
+    <?php } ?>
+    <?php if ( isset ( $_GET['address-deleted'] ) && $_GET['address-deleted'] == true ) { ?>
+        <div class="notice notice-success">
+            <p><?php _e( 'Address deleted successfully', 'wedevs-academy' ); ?></p>
+        </div>
     <?php } ?>
 
     <form action="" method="post">
