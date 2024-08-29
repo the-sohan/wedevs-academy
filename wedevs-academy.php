@@ -69,6 +69,8 @@ final class WeDevs_Academy {
      * @return void
      */
     public function init_plugin() {
+
+        new WeDevs\Academy\Assets();
         if ( is_admin() ) {
             new \WeDevs\Academy\Admin();
         } else {

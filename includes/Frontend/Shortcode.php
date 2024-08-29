@@ -12,7 +12,7 @@ class Shortcode {
     }
 
     public function render_shortcode( $atts, $content = '' ) {
-        return 'Hello from shortcode';
+        return '<div class="testt">Hello from shortcode</div>';
     }
 
 }
