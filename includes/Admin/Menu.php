@@ -26,7 +26,7 @@ class Menu {
         $parent_slug = 'wedevs-academy';
         $capability = 'manage_options';
     
-        add_menu_page(
+        $hook = add_menu_page(
             __( 'weDevs Academy', 'wedevs-academy' ), 
             __( 'Academy', 'wedevs-academy' ), 
             $capability, 
@@ -35,6 +35,8 @@ class Menu {
             'dashicons-welcome-learn-more', 
             null
         );
+
+        add_action( 'admin_head-' . $hook, [ $this, 'enqueue_assets' ] );
     
         // add_submenu_page($parent_slug, $page_title, $menu_title, $capability, $menu_slug, $function);
         add_submenu_page( 
@@ -59,6 +61,11 @@ class Menu {
     public function settings_page() {
         echo 'Address Book Settings';
     }
+
+    public function enqueue_assets(){
+        wp_enqueue_style( 'academy-admin-style' );
+    }
+    
 }
 
 

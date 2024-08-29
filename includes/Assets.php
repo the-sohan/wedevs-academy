@@ -12,7 +12,7 @@ class Assets {
         return [
             'academy-script' => [
                 'src'       => WD_ACADEMY_ASSETS . '/js/frontend.js',
-                'version'   => filemtime( WD_ACADEMY_PATH . '/assets/js/frontend.js' ),
+                'version'   => filemtime(WD_ACADEMY_PATH . '/assets/js/frontend.js'),
                 'deps'      => [ 'jquery' ]
             ]
         ];
@@ -22,7 +22,11 @@ class Assets {
         return [
             'academy-style' => [
                 'src'       => WD_ACADEMY_ASSETS . '/css/frontend.css',
-                'version'   => filemtime( WD_ACADEMY_PATH . '/assets/css/frontend.css' ),
+                'version'   => filemtime( WD_ACADEMY_PATH . '/assets/css/frontend.css' )
+            ],
+            'academy-admin-style' => [
+                'src'       => WD_ACADEMY_ASSETS . '/css/admin.css',
+                'version'   => filemtime( WD_ACADEMY_PATH . '/assets/css/admin.css' )
             ]
         ];
     }
@@ -31,15 +35,16 @@ class Assets {
         $scripts = $this->get_scripts();
         foreach ( $scripts as $handle => $script ) {
             $deps = isset( $script['deps'] ) ? $script['deps'] : false;
-
             wp_register_script( $handle, $script['src'], $deps, $script['version'], true );
         }
 
         $styles = $this->get_styles();
         foreach ( $styles as $handle => $style ) {
             $deps = isset( $style['deps'] ) ? $style['deps'] : false;
-
-            wp_register_style( $handle, $style['src'], $style['version'] );
+            wp_register_style( $handle, $style['src'], $deps, $style['version'] );
+            // wp_register_style($handle, $src, $deps, $media)
         }
     }
 }
+
+
