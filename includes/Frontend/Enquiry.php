@@ -15,8 +15,12 @@ class Enquiry {
 
         wp_enqueue_script( 'academy-enquiry-script' );
         wp_enqueue_style( 'academy-enquiry-style' );
+       
+        ob_start();
         
-        return '<div class="testt">Hello from shortcode</div>';
+        include __DIR__ . '/views/enquiry.php';
+
+        return ob_get_clean();
     }
 
 }
