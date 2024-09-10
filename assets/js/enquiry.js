@@ -5,8 +5,12 @@
 
         var data =  $(this).serialize();
 
-        $.post( weDevsAcademy.ajaxurl, data, function(data) {
-            
+        $.post( weDevsAcademy.ajaxurl, data, function(response) {
+            if(response.success) {
+                console.log(response.success);
+            } else {
+                alert(response.data.message);
+            }
         })
         .fail(function() {
             alert( weDevsAcademy.error );
