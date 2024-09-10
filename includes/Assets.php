@@ -42,17 +42,23 @@ class Assets {
 
     public function enqueue_assets() {
         $scripts = $this->get_scripts();
+        $styles = $this->get_styles();
+
         foreach ( $scripts as $handle => $script ) {
             $deps = isset( $script['deps'] ) ? $script['deps'] : false;
             wp_register_script( $handle, $script['src'], $deps, $script['version'], true );
         }
-
-        $styles = $this->get_styles();
+        
         foreach ( $styles as $handle => $style ) {
             $deps = isset( $style['deps'] ) ? $style['deps'] : false;
             wp_register_style( $handle, $style['src'], $deps, $style['version'] );
             // wp_register_style($handle, $src, $deps, $media)
         }
+
+        wp_localize_script( 'academy-enquiry-script', 'weDevsAcademy', [
+            'ajaxurl'   => admin_url( 'admin-ajax.php' ),
+            'error'     => __( 'Something went wrong', 'wedevs-academy' ),
+        ] );
     }
 }
 
