@@ -116,9 +116,17 @@ function wd_ac_address_count() {
 function wd_ac_get_address( $id ) {
     global $wpdb;
 
-    return $wpdb->get_row( 
-        $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}ac_addresses WHERE id = %d", $id )
-    );
+    $address = wp_cache_get( 'book-' . $id, 'address');
+
+    if ( false === $address ) {
+        $address = $wpdb->get_row(
+            $wpdb ->prepare( "SELECT * FROM {$wpdb->prefix}ac_addresses WHERE id = %d", $id )
+        );
+
+        wp_cache_set( 'book-' . $id, $address, 'address' );
+    }
+
+    return $address;
 }
 
 /**
